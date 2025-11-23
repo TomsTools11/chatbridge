@@ -1,0 +1,21 @@
+{
+  "name": "@chatbridge/slack-adapter",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@slack/web-api": "^7.0.0",
+    "@slack/oauth": "^2.6.0",
+    "@chatbridge/shared": "workspace:*",
+    "pino": "^8.17.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/node": "^20.10.0"
+  }
+}

@@ -1,0 +1,269 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Admin users who can access the dashboard
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  role      UserRole @default(MEMBER)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  workspaces       SlackWorkspace[]
+  channelAliases   ChannelAlias[]
+  auditLogs        AuditLog[]
+
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  MEMBER
+}
+
+// Connected Slack workspaces
+model SlackWorkspace {
+  id           String   @id @default(uuid())
+  teamId       String   @unique @map("team_id")
+  teamName     String   @map("team_name")
+  teamDomain   String?  @map("team_domain")
+  teamIcon     String?  @map("team_icon")
+
+  // OAuth tokens (encrypted)
+  accessToken  String   @map("access_token")
+  botUserId    String   @map("bot_user_id")
+  scopes       String[] // Array of granted scopes
+
+  status       WorkspaceStatus @default(ACTIVE)
+  installedBy  String   @map("installed_by")
+
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  user            User             @relation(fields: [installedBy], references: [id], onDelete: Cascade)
+  channelAliases  ChannelAlias[]
+  conversationMaps ConversationMap[]
+
+  @@index([teamId])
+  @@map("slack_workspaces")
+}
+
+enum WorkspaceStatus {
+  ACTIVE
+  DISCONNECTED
+  ERROR
+}
+
+// Email connection configuration
+model EmailConnection {
+  id          String   @id @default(uuid())
+  provider    EmailProvider
+
+  // SES/SendGrid credentials (encrypted)
+  credentials Json
+
+  domain      String   // bridge.yourapp.com
+  region      String?  // For SES
+  status      ConnectionStatus @default(ACTIVE)
+
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("email_connections")
+}
+
+enum EmailProvider {
+  SES
+  SENDGRID
+  GMAIL
+}
+
+enum ConnectionStatus {
+  ACTIVE
+  INACTIVE
+  ERROR
+}
+
+// Email aliases mapped to Slack channels
+model ChannelAlias {
+  id           String   @id @default(uuid())
+  workspaceId  String   @map("workspace_id")
+  channelId    String   @map("channel_id")
+  channelName  String   @map("channel_name")
+  isPrivate    Boolean  @default(false) @map("is_private")
+
+  // Generated email alias
+  aliasEmail   String   @unique @map("alias_email")
+
+  // Initial recipients for outbound emails (JSON array of email addresses)
+  recipients   Json     @default("[]")
+
+  status       AliasStatus @default(ACTIVE)
+  createdBy    String   @map("created_by")
+
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  workspace    SlackWorkspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  creator      User           @relation(fields: [createdBy], references: [id])
+  conversationMaps ConversationMap[]
+  messageLogs  MessageLog[]
+
+  @@index([aliasEmail])
+  @@index([workspaceId, channelId])
+  @@map("channel_aliases")
+}
+
+enum AliasStatus {
+  ACTIVE
+  PAUSED
+  DELETED
+}
+
+// Threading state between email and Slack
+model ConversationMap {
+  id              String   @id @default(uuid())
+
+  workspaceId     String   @map("workspace_id")
+  channelId       String   @map("channel_id")
+  channelAliasId  String   @map("channel_alias_id")
+
+  // Slack thread identifier
+  slackThreadTs   String   @map("slack_thread_ts")
+
+  // Email thread identifier (root Message-ID)
+  emailThreadId   String   @map("email_thread_id")
+  emailSubject    String?  @map("email_subject")
+
+  // Participants (JSON array of email addresses)
+  participants    Json     @default("[]")
+
+  lastMessageAt   DateTime @map("last_message_at")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  // Relations
+  workspace       SlackWorkspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  channelAlias    ChannelAlias   @relation(fields: [channelAliasId], references: [id], onDelete: Cascade)
+  messageLogs     MessageLog[]
+
+  @@unique([emailThreadId, slackThreadTs])
+  @@index([slackThreadTs])
+  @@index([emailThreadId])
+  @@map("conversation_maps")
+}
+
+// Message delivery tracking
+model MessageLog {
+  id              String   @id @default(uuid())
+  traceId         String   @map("trace_id")
+
+  conversationId  String?  @map("conversation_id")
+  channelAliasId  String?  @map("channel_alias_id")
+
+  direction       MessageDirection
+
+  // Source and destination message IDs
+  sourceMsgId     String   @map("source_msg_id")
+  destMsgId       String?  @map("dest_msg_id")
+
+  status          MessageStatus
+  errorCode       String?  @map("error_code")
+  errorMessage    String?  @map("error_message")
+  retryCount      Int      @default(0) @map("retry_count")
+
+  latencyMs       Int?     @map("latency_ms")
+
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  conversation    ConversationMap? @relation(fields: [conversationId], references: [id], onDelete: SetNull)
+  channelAlias    ChannelAlias?    @relation(fields: [channelAliasId], references: [id], onDelete: SetNull)
+
+  @@index([traceId])
+  @@index([sourceMsgId, direction])
+  @@index([status, createdAt])
+  @@map("message_logs")
+}
+
+enum MessageDirection {
+  EMAIL_TO_SLACK
+  SLACK_TO_EMAIL
+}
+
+enum MessageStatus {
+  PENDING
+  DELIVERED
+  FAILED
+  RETRYING
+}
+
+// Admin action audit trail
+model AuditLog {
+  id        String   @id @default(uuid())
+  actor     String   // User ID who performed the action
+  action    String   // CREATE_ALIAS, DELETE_ALIAS, etc.
+  subject   String   // What was acted upon
+  metadata  Json?    // Additional context
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user      User     @relation(fields: [actor], references: [id], onDelete: Cascade)
+
+  @@index([actor, createdAt])
+  @@index([action, createdAt])
+  @@map("audit_logs")
+}
+
+// File attachment metadata
+model FileObject {
+  id          String   @id @default(uuid())
+
+  // Storage info
+  storageKey  String   @unique @map("storage_key")
+  storageType StorageType @map("storage_type")
+
+  // File metadata
+  filename    String
+  size        Int
+  mimeType    String   @map("mime_type")
+  sha256      String?
+
+  // Security
+  scanStatus  ScanStatus @default(PENDING) @map("scan_status")
+  scanResult  Json?    @map("scan_result")
+
+  // URLs
+  publicUrl   String?  @map("public_url")
+  expiresAt   DateTime? @map("expires_at")
+
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@index([storageKey])
+  @@index([scanStatus])
+  @@map("file_objects")
+}
+
+enum StorageType {
+  S3
+  SLACK
+}
+
+enum ScanStatus {
+  PENDING
+  SCANNING
+  CLEAN
+  INFECTED
+  ERROR
+}

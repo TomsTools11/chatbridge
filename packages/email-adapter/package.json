@@ -1,0 +1,24 @@
+{
+  "name": "@chatbridge/email-adapter",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@aws-sdk/client-ses": "^3.490.0",
+    "@aws-sdk/client-s3": "^3.490.0",
+    "mailparser": "^3.6.5",
+    "nodemailer": "^6.9.7",
+    "@chatbridge/shared": "workspace:*",
+    "pino": "^8.17.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/node": "^20.10.0",
+    "@types/nodemailer": "^6.4.14"
+  }
+}

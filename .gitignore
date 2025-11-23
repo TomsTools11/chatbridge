@@ -1,5 +1,34 @@
 .DS_Store
 node_modules/
 .env
+.env.local
 .claude/
 .claude-flow/
+
+# Build outputs
+dist/
+build/
+.next/
+.turbo/
+*.tsbuildinfo
+
+# Testing
+coverage/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Misc
+.vercel/
+.cache/
