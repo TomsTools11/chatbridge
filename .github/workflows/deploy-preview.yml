@@ -1,0 +1,26 @@
+name: Deploy to Railway (Preview)
+
+on:
+  push:
+    branches: [develop]
+
+jobs:
+  deploy:
+    name: Deploy to Preview Environment
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Railway Preview
+        run: |
+          echo "🚀 Deploying to Railway Preview"
+          echo "Railway will auto-deploy develop branch to preview environment"
+          echo "No manual deployment needed - Railway GitHub integration handles this"
+
+      - name: Deployment Notice
+        run: |
+          echo "✅ Code pushed to develop"
+          echo "🔄 Railway will automatically deploy to preview"
+          echo "📊 Check Railway dashboard for deployment status"

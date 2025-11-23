@@ -1,0 +1,26 @@
+name: Deploy to Railway (Production)
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Railway
+        run: |
+          echo "🚀 Deploying to Railway Production"
+          echo "Railway will auto-deploy from main branch"
+          echo "No manual deployment needed - Railway GitHub integration handles this"
+
+      - name: Deployment Notice
+        run: |
+          echo "✅ Code pushed to main"
+          echo "🔄 Railway will automatically deploy"
+          echo "📊 Check Railway dashboard for deployment status"
