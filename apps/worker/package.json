@@ -1,0 +1,30 @@
+{
+  "name": "@chatbridge/worker",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@chatbridge/database": "workspace:*",
+    "@chatbridge/shared": "workspace:*",
+    "@chatbridge/slack-adapter": "workspace:*",
+    "@chatbridge/email-adapter": "workspace:*",
+    "bull": "^4.12.0",
+    "redis": "^4.6.12",
+    "pino": "^8.17.0",
+    "dotenv": "^16.3.1",
+    "axios": "^1.6.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/bull": "^4.10.0",
+    "@types/node": "^20.10.0",
+    "@types/uuid": "^9.0.7",
+    "typescript": "^5.3.3",
+    "tsx": "^4.7.0"
+  }
+}
