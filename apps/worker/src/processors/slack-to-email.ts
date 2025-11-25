@@ -100,12 +100,16 @@ export async function processSlackToEmail(
     );
 
     // 4. Initialize Slack client
-    const slackClient = new SlackClient(workspace.accessToken);
+    const slackClient = new SlackClient({
+      botToken: workspace.accessToken,
+      teamId: workspace.teamId,
+      logger: jobLogger,
+    });
 
     // 5. Get user info for sender name
-    const userInfo = await slackClient.getUserInfo(event.user);
-    const senderName = userInfo.real_name || userInfo.name || 'Slack User';
-    const senderEmail = userInfo.profile?.email;
+    const userInfo = await slackClient.getUser(event.user);
+    const senderName = userInfo?.realName || userInfo?.name || 'Slack User';
+    const senderEmail = userInfo?.email;
 
     jobLogger.info({ senderName, senderEmail }, 'Retrieved sender info');
 

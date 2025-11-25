@@ -209,7 +209,11 @@ export async function processEmailToSlack(
     }
 
     // 7. Initialize Slack client
-    const slackClient = new SlackClient(channelAlias.workspace.accessToken);
+    const slackClient = new SlackClient({
+      botToken: channelAlias.workspace.accessToken,
+      teamId: channelAlias.workspace.teamId,
+      logger: jobLogger,
+    });
 
     // 8. Post message to Slack
     let slackTs: string;

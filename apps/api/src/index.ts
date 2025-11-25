@@ -7,6 +7,9 @@ import pino from 'pino';
 import { createHealthRoutes } from './routes/health';
 import { createSlackRoutes } from './routes/slack';
 import { createEmailRoutes } from './routes/email';
+import { createAliasRoutes } from './routes/aliases';
+import { createWorkspaceRoutes } from './routes/workspaces';
+import { createMessageRoutes } from './routes/messages';
 import { errorHandler } from './middleware/error-handler';
 import { initializeServices } from './services';
 
@@ -36,6 +39,11 @@ const services = initializeServices(logger);
 app.use('/health', createHealthRoutes(services));
 app.use('/slack', createSlackRoutes(services));
 app.use('/webhooks/email', createEmailRoutes(services));
+
+// Admin API routes
+app.use('/api/aliases', createAliasRoutes(services));
+app.use('/api/workspaces', createWorkspaceRoutes(services));
+app.use('/api/messages', createMessageRoutes(services));
 
 // Error handling
 app.use(errorHandler);
