@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Home, Slack, Mail, MessageSquare, BookOpen } from 'lucide-react';
+import { Home, Slack, Mail, MessageSquare, BookOpen, Table } from 'lucide-react';
 
 const routes = [
   {
@@ -35,6 +35,12 @@ const routes = [
     icon: BookOpen,
     href: '/glossary',
     color: 'text-amber-500',
+  },
+  {
+    label: 'Terms Table',
+    icon: Table,
+    href: '/terms-table',
+    color: 'text-cyan-500',
   },
 ];
 
