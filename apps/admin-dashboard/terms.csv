@@ -1,0 +1,112 @@
+﻿Term,Acronym,Priority,Related,Definition,Calculation,Additional Notes
+Quote-to-Close,QTC,Top Priority,"- Sales Conversion Rate
+- Customer Acquisition Cost
+- Lead Generation",Quote-to-Close measures the percentage of quoted prospects that become closed customers.,Quote-to-Close Rate = (# closed customers ÷ # quoted prospects) × 100.,
+CPL (Cost Per Lead),CPL,Top Priority,"- Cost Per Acquisition (CPA)
+- Return on Investment (ROI)
+- Click-Through Rate (CTR)",CPL (Cost Per Lead) measures the cost incurred to acquire a single lead or potential customer.,,
+Click-to-Close,CTC,Top Priority,"- Conversion Rate
+- Customer Acquisition
+- Advertising Performance",Click-to-Close measures the effectiveness of ads by calculating the percentage of customers who close after clicking.,Click-to-Close Rate = (# closed customers ÷ # ad clicks) × 100.,
+CPA (Cost Per Acquisition),CPA,Top Priority,"- Customer Acquisition Cost (CAC)
+- Return on Investment (ROI)
+- Lifetime Value (LTV)",CPA measures the cost to acquire each new customer during a specified period.,"CPA = Total acquisition cost over period ÷ # new customers acquired in that period. Decide if you include only media cost or also headcount, tools, etc.",CPA measures the cost to acquire a new
+Geo/Zip Codes/Areas,GEO,Top Priority,"- Geographic Performance Metrics
+- Sales Analytics by Region
+- Lead Conversion Rates by ZIP Code",Geo/Zip Codes/Areas refer to geographic regions used for analyzing performance metrics like sales and leads.,"KPI variants: performance by geo such as CPA by ZIP, sales rate by region, or quote volume by ZIP. Example: sales rate by ZIP = (# sales in ZIP ÷ # leads in ZIP) × 100.",
+Currently Insured,CI,Top Priority,"- Insurance Coverage
+- Lead Tracking
+- Current Policy Status","""Currently Insured"" refers to leads reporting active insurance coverage, calculated as a percentage of total leads.",Often tracked as % of leads who report having current insurance: (# currently insured leads ÷ total leads) × 100.,
+Core Target Group,CTG,Top Priority,"- Target Audience
+- Market Segmentation
+- Lead Generation",Core Target Group refers to a specific segment of leads defined by set criteria for targeted marketing efforts.,"Not a formula KPI; defined by a ruleset (e.g., currently insured, 30–60, homeowner, certain zips, good credit, 0 DUIs). You can track its share: (# core-group leads ÷ all leads) × 100.",
+Items/Cost Per Item,IPC,Medium Priority,"- Pricing Strategy
+- Budget Management
+- Cost Analysis","""Items/Cost Per Item"" refers to a list detailing individual item costs.",,
+Conversion Pixel,CP,Medium Priority,"- Tracking Pixel
+- Conversion Rate
+- Digital Marketing",A conversion pixel tracks user actions on a website to measure the effectiveness of advertising campaigns.,,
+Day-Part Schedule,DP,Medium Priority,"- Time Management
+- Daily Planning
+- Scheduling Techniques",A day-part schedule organizes activities or tasks by specific time segments throughout the day.,,
+Premium Per Household,PPH,Medium Priority,"- Household Expenses
+- Insurance Premiums
+- Family Budgeting",Premium per household refers to the average cost charged to each household for a service or product.,,
+Ad Units / Ad Creative,AU/AC,Medium Priority,"- Advertising Formats
+- Creative Assets
+- Marketing Campaigns",Ad units are components used for advertising placement; ad creatives are the visuals and messaging within those units.,,
+Lead Line,LL,Medium Priority,"- Lead Generation
+- Sales Pipeline
+- Customer Outreach",A lead line is a preliminary statement that captures attention and encourages further interest or action.,,
+CRM (Customer Relationship Management),CRM,Medium Priority,"- Customer Engagement
+- Sales Automation
+- Lead Management","CRM is a system for managing a company's interactions with current and potential customers. 
+
+Allstate: 
+-Ricochet 360 (Rico) 
+-LeadManager (we do not integrate directly with and need to use a system called Quoteburst) 
+
+Farmers: 
+-Little Giant 
+-AgencyZOOM
+-AgencyMVP",,
+Channel ID (or Advertiser ID),CID,Medium Priority,"- Advertiser Account
+- Marketing Channel
+- Campaign Identifier",Channel ID refers to a unique identifier for a specific advertising channel or advertiser in marketing platforms.,,
+Ad Groups,AG,Medium Priority,"- Advertising Campaigns
+- Marketing Strategies
+- Target Audiences",Ad groups are collections of ads that share the same targeting settings and budget within a campaign.,,
+IVR (Interactive Voice Response),IVR,Medium Priority,"- Automated Call Distribution (ACD)
+- Speech Recognition
+- Touch-Tone Input",IVR (Interactive Voice Response) allows users to interact with a phone system through voice or keypad inputs.,,
+Base Bid,BB,Medium Priority,"- Proposal
+- Tender
+- Contract",A base bid is the initial offer made by a contractor to complete a project.,,
+Ricochet & CopperSt,R&C,Medium Priority,"- Ricochet
+- Copper
+- Medium Priority","Ricochet & CopperSt refers to a project or collaboration involving these two entities, highlighting a medium priority status.",,
+LMS (Lead Management System),LMS,Medium Priority,"- Customer Relationship Management (CRM)
+- Sales Pipeline Management
+- Marketing Automation",A Lead Management System (LMS) organizes and tracks potential customers through the sales process.,,
+Sales Rate,SR,Medium Priority,"- Conversion Rate
+- Lead Generation
+- Sales Funnel",Sales rate measures conversion efficiency from leads to sales or quotes to policies.,"Sales Rate = (# sales ÷ # leads) × 100, or (# policies bound ÷ # quotes issued) × 100, depending on how GOAL defines the funnel stage.",
+Multi-car,MCA,Medium Priority,"- Auto insurance
+- Policyholder
+- Vehicle fleet management",Multi-car refers to insurance policies covering two or more vehicles.,KPI variant: multi-car attach rate = (# policies with ≥2 vehicles ÷ total auto policies) × 100.,
+Bid Modifiers,BM,Medium Priority,"- Key Performance Indicators (KPIs)
+- Bid Adjustments
+- Digital Advertising Metrics","Bid modifiers adjust bids based on specific criteria, influencing key performance indicators (KPIs).","Not a KPI itself; used to influence KPIs. For example, mobile bid modifier +20% raises bids on mobile searches by 20% vs base bid.",
+SR22,SR22,Medium Priority,"- High-risk insurance
+- Driver's license compliance
+- Financial responsibility laws",SR22 is a certification proving a driver has met insurance requirements after certain violations.,"Not a performance KPI, but trackable as % of SR22-required drivers: (# SR22 drivers ÷ total drivers) × 100.",
+Homeowner,HO,Medium Priority,"- Homeowner demographics
+- Customer segmentation
+- Market penetration rate","A homeowner is a customer who owns their residence, influencing market penetration calculations.",KPI variant: homeowner penetration = (# customers marked as homeowners ÷ total customers) × 100.,
+Credit Indicator,CI,Medium Priority,"- Credit Risk Assessment
+- Financial Metrics
+- Quotation Analysis",A Credit Indicator (CI) tracks the percentage of quotes across different credit bands.,"Not usually exposed as a KPI, but can be tracked as distribution: % of quotes in each credit band.",
+DUIs,DUI,Low Priority,"- Driving under the influence (DUI)
+- Incidence rate
+- Total drivers","DUIs refer to driving under the influence of alcohol or drugs, leading to legal penalties.",KPI variant: DUI incidence rate = (# drivers with ≥1 DUI ÷ total drivers quoted) × 100.,
+Captive Agent,CA,Low Priority,"- Captive Distribution
+- Independent Agent
+- Channel Segmentation","A captive agent is a representative tied to a single company, distinguishing from independent agents.","Not a KPI; used as a segmentation label for distribution channel analysis (e.g., production by captive vs independent).",
+Continuous Coverage,CC,Low Priority,"- Underwriting
+- Pricing Factor
+- Lapse Rate","Continuous Coverage refers to leads without any lapse in coverage, influencing underwriting and pricing decisions.","Not a KPI itself, but used as an underwriting / pricing factor. You may track % of leads with continuous coverage: (# leads with no lapse ÷ total leads) × 100.",
+Independent Broker/Agent,IBA,Low Priority,"- Independent Agents
+- Captive Agents
+- Direct Sales","An Independent Broker/Agent (IBA) segments production and performance by channel, distinguishing independent from captive and direct channels.",Not a KPI; used to segment production and performance by channel (independent vs captive vs direct).,
+ABO,ABO,,"- Agent performance metrics
+- Contract compliance
+- Minimum job requirements",Minimum required items for agents to maintain their job; missing can lead to contract loss.,,
+Telemarketing Companies,TC,,"- Telemarketing
+- Lead Generation
+- Call Center Services",Telemarketing companies hire third parties to contact potential customers on behalf of agencies.,,
+VC,VC,,"- Variable Compensation (VC)
+- Commission Structure
+- Performance Metrics",VC is the minimum number of items an Allstate agent must sell for higher commission eligibility.,,
+Bound/ Household bound,HB,,"- Household policies
+- Premium data
+- Sales analysis","""Bound"" refers to a term for ""sale,"" aggregating multiple policies per household for data analysis.",,Then # of households

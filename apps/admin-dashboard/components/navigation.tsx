@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Home, Slack, Mail, MessageSquare, Settings } from 'lucide-react';
+import { Home, Slack, Mail, MessageSquare, BookOpen } from 'lucide-react';
 
 const routes = [
   {
@@ -29,6 +29,12 @@ const routes = [
     icon: MessageSquare,
     href: '/messages',
     color: 'text-green-700',
+  },
+  {
+    label: 'Glossary',
+    icon: BookOpen,
+    href: '/glossary',
+    color: 'text-amber-500',
   },
 ];
 
